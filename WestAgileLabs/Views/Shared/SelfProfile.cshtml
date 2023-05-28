@@ -1,0 +1,223 @@
+﻿@using System.Dynamic;
+@using WestAgileLabs.Models;
+@model dynamic
+
+
+<html>
+<head>
+    <style>
+        .column-33 {
+            float: left;
+            width: 33.33333%;
+            padding: 20px;
+        }
+
+        .column-66 {
+            float: left;
+            width: 66.66666%;
+            padding: 20px;
+        }
+
+        .container {
+            padding: 4px;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 100%;
+            min-height: 20%;
+            margin: 20px;
+            text-align: center;
+            font-family: arial;
+        }
+
+        .scroll {
+            max-height: 200px;
+            height: auto;
+            overflow-y: scroll;
+            scrollbar-color: light;
+        }
+
+        .scroll::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .profilepic {
+            max-width: 100%;
+            height: auto;
+        }
+
+        button[type=submit] {
+            margin: 1% 0;
+            padding: 10px 20px;
+            opacity: 0.9;
+        }
+
+        button[type=button] {
+            margin: 1% 0;
+            padding: 8px;
+            opacity: 0.9;
+        }
+
+        .scrollskill {
+            max-height: 150px;
+            height: auto;
+            overflow-y: scroll;
+            scrollbar-color: light;
+        }
+
+        .no {
+            display: none;
+            visibility: hidden;
+        }
+    </style>
+    
+    <script type="text/javascript">
+
+        const skills = new Array();
+        const exp = new Array();
+
+        function addtolist(id) {
+            if (!skills.includes(id)) {
+                skills.push(id);
+            }
+            else {
+                alert("skill already selected !!!");
+                return;
+            }
+            var b = document.createElement("input");
+            b.type = "button";
+            b.value = document.getElementById(id).value;
+            b.onclick = remove;
+            b.setAttribute('id', id);
+            b.className = "btn btn-outline-success";
+
+            var c = document.createElement("input");
+            c.type = "number";
+            var idtext = id.toString();
+            idtext = idtext.concat('```');
+            c.setAttribute('id', idtext);
+            c.className = "form-control";
+            c.setAttribute('placeholder', "Enter experience in months");
+
+            var d = document.createElement("br");
+            var li = document.createElement("li");
+            li.append(b);
+            li.append(c);
+            li.append(d);
+            document.getElementById("selected").append(li);
+        }
+
+        function remove(e) {
+            var el = e.target;
+            var id = Number(el.id);
+            el.parentNode.remove();
+            const index = skills.indexOf(id);
+            if (index > -1) { // only splice array when item is found
+                skills.splice(index, 1); // 2nd parameter means remove one item only
+            }
+        }
+
+        function addtodb() {
+            for (let key in skills) {
+                var id = skills[key].toString();
+                id = id.concat('```');
+                var element = document.getElementById(id).value;
+                exp.push(element);
+            }
+            var b = document.getElementById("originalskills");
+            var str1 = skills.join("~~and~~");
+            var str2 = exp.join("~~and~~");
+            var finalstring = str1.concat('~~or~~', str2);
+            b.setAttribute('value', finalstring);
+            document.getElementById("originalskills").click();
+        }
+
+
+    </script>
+</head>
+<body>
+    @foreach (Employee employee in Model.Employee)
+    {
+        Console.WriteLine(employee.Employee_Name);
+        <div class="card">
+            <div class="row">
+                <div class="column-33">
+                    <div class="card">
+                        <hr />
+                        <div style="text-align: center">
+                            @{
+                                if (employee.Gender == "Male")
+                                {
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profilepic" height="200" width="200" style="max-width: 100% " />
+                                }
+                                else
+                                {
+                                    <img src="https://cdn-icons-png.flaticon.com/512/6833/6833591.png" class="profilepic" height="200" width="200" style="max-width: 100% " />
+                                }
+                            }
+                        </div>
+                        <h1>@employee.Employee_Name</h1>
+                        @foreach (Role role in Model.EmployeeRole)
+                        {
+                            <h2 class="role">Role : @role.RoleName</h2>
+                        }
+                        <h3>@employee.Email</h3>
+                        <h3>+91 @employee.PhoneNumber</h3>
+                    </div>
+                </div>
+                <div class="column-66">
+                    <div class="card">
+                        <h3 style="padding:10px">Total Experience : @employee.Experience months</h3>
+                        <h3>Date of Birth : @employee.DOB.ToLongDateString()</h3>
+                    </div>
+                    <div class="card">
+                        <div style="text-align:center">
+                            <h2 style="margin:10px">Skills</h2>
+                            <hr style="margin:15px">
+                        </div>
+                        <div class="scroll">
+                            @for (int i = 0; i < Model.EmployeeSkill.Count; i++)
+                            {
+                                <h3>@Model.EmployeeSkill[i].SkillName - @Model.Skillexp[i] months</h3>
+                            }
+                        </div>
+                        <div style="text-align:center">
+                            <button type="button" class="btn btn-primary" value="View Master Skills" data-toggle="modal" data-target="#myModal">View Master Skills</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Master Skill List</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Select skill to add in your skill list.</p>
+                        @foreach (Skill skill in Model.masterSkills)
+                        {
+                            <input type="button" id="@skill.Id" class="btn btn-outline-success" onclick="addtolist(@skill.Id)" value="@skill.SkillName" />
+                        }
+                        <hr />
+                        <p>Selected Skills:</p>
+                        <div id="selected" class="scrollskill"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <form method="post">
+                            <input type="submit" id="originalskills" name="skills" class="no" asp-controller="Home" asp-action="AddSkilltoDB" value="apple" />
+                            <button type="button" class="btn btn-default" onclick="addtodb()" data-dismiss="modal">Add Skill</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

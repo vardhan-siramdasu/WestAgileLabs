@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model dynamic
+<h1> Tm add master list</h1>
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function fun(id) {
+            var b = document.getElementById('1').value;
+            var c = document.getElementById('3');
+            c.setAttribute('value', b);
+            document.getElementById('3').click();
+        }
+    </script>
+    <style>
+        .no {
+            visibility: hidden;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align:center">
+        <h1>Add Master Skills</h1>
+    </div>
+    <legend>Existing Skills</legend>
+        <div class="container">
+            @foreach (Skill skill in Model.skills)
+            {
+                <button type="button" style="padding-bottom:5px; margin-bottom:5px;" class="btn btn-secondary btn-sm">@skill.SkillName</button>
+            }
+        </div>
+        <br />
+        <form method="post">
+            <legend lass="mt-4">Skill Name</legend>
+            <input type="text" id="1" class="form-control" placeholder="Add new skill to Master list..." />
+            <br />
+            <input type="button" id="2" class="btn btn-primary" onclick="fun(this.id)" style="width:150px;" value="Add Skill" />
+            <input type="submit" id="3" class="no" asp-controller="TM" asp-action="AddMasterList" name="skillname" value="~" />
+            <a href="javascript:history.back()" class="btn btn-secondary" style="width:150px">Previous Page</a>
+        </form>
+</body>
+</html>

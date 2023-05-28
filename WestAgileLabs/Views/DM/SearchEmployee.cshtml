@@ -1,0 +1,124 @@
+﻿@using WestAgileLabs.Controllers;
+@model dynamic
+
+
+<h1>DM search employee</h1>
+
+
+<html>
+<head>
+    <style>
+        .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        tr:nth-child(even) {
+            background-color: darkslategrey;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 70%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .no {
+            visibility: hidden;
+            display: none;
+        }
+
+    </style>
+    <script>
+        function fun1(id) {
+            var b = document.getElementById("callback");
+            b.setAttribute('value', id);
+            document.getElementById("callback").click();
+        }
+
+        function fun2(id) {
+            var dd = id.slice(0, -3);
+            var b = document.getElementById(dd).value;
+            b = dd.concat('~~', b)
+            var s = document.getElementById('submit');
+            s.setAttribute('value', b);
+            document.getElementById('submit').click();
+        }
+
+
+    </script>
+</head>
+<body>
+    <div style="text-align:center">
+        <h3>Select Skill to get Employee details</h3>
+        <br />
+    </div>
+    <div class="container">
+        @foreach (Skill skill in Model.skills)
+        {
+            <input type="button" onclick="fun1(this.id)" id="@skill.Id" class="btn btn-outline-danger" value="@skill.SkillName" />
+        }
+        <form method="post">
+            <input type="submit" value="" name="sid" class="no" asp-controller="DM" asp-action="SearchEmployee" id="callback" />
+        </form>
+    </div>
+    <br />
+    <div style="text-align:center">
+        <a href="javascript:history.back()" class="btn btn-secondary" style="width:150px">Previous Page</a>
+    </div>
+    <br />
+    <div style="text-align:center">
+        <h3>Employees with selected skill</h3>
+    </div>
+    <br />
+    <div>
+        @{
+            if (Model.idvalue != 0)
+            {
+                <div style="align-content:center">
+                    <table class="center">
+                        <tr>
+                            <th>Employee name</th>
+                            <th>Skill name</th>
+                            <th>Employee experience</th>
+                            <th>Add Role</th>
+                            <th>Make change</th>
+                        </tr>
+                        @foreach (Table t in Model.table)
+                        {
+                            <tr>
+                                <td>@t.Name</td>
+                                <td>@t.Skill</td>
+                                <td>@t.Exp months</td>
+                                <td>
+                                    <form method="post">
+                                        <select class="form-select d-flex" id="@t.Email">
+                                            <option value="0">--select Role--</option>
+                                            <option value="2">HR</option>
+                                            <option value="3">Tech Manager</option>
+                                            <option value="4">Delivery Manager</option>
+                                            <option value="5">Developer</option>
+                                            <option value="6">QA</option>
+                                            <option value="7">Employee</option>
+                                        </select>
+                                        <input type="submit" id="submit" name="EIdRId" class="no" asp-controller="DM" asp-action="AssignRole" asp-route-id="@t.Eid" value="~">
+                                    </form>
+                                </td>
+                                <td>
+                                    <input type="button" id="@t.Email!!!" class="btn btn-primary" value="Submit" onclick="fun2(this.id)">
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }
+        }
+    </div>
+</body>
+</html>

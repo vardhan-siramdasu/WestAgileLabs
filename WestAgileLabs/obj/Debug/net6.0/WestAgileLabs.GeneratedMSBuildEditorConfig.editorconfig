@@ -1,0 +1,105 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = WestAgileLabs
+build_property.RootNamespace = WestAgileLabs
+build_property.ProjectDir = D:\WALvs\WestAgileLabs\WestAgileLabs\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\WALvs\WestAgileLabs\WestAgileLabs
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Admin/AddEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkRW1wbG95ZWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Admin/AddMasterList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkTWFzdGVyTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Admin/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSG9tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Admin/SearchEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU2VhcmNoRW1wbG95ZWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/DM/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1cSG9tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/DM/SearchEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1cU2VhcmNoRW1wbG95ZWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Employee/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcSG9tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Home/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/HR/AddEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSFJcQWRkRW1wbG95ZWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/HR/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSFJcSG9tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Shared/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEhvbWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Shared/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Shared/SelfProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFNlbGZQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/TM/AddMasterList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVE1cQWRkTWFzdGVyTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/TM/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVE1cSG9tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WALvs/WestAgileLabs/WestAgileLabs/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-5iog3ewmq0

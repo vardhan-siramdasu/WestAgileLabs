@@ -1,0 +1,188 @@
+﻿@model Login
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    var isdisplayredLogin = "none";
+    if (ViewData["ValidPassword"] as string == "false")
+    {
+        isdisplayredLogin = "block";
+    }
+
+    var isdisplayredSignup = "none";
+    if (ViewData["UnauthoriredUser"] as string == "true")
+    {
+        isdisplayredSignup = "block";
+    }
+
+    var isdisplaygreen = "none";
+    if (ViewData["UserCreated"] as string == "true")
+    {
+        isdisplaygreen = "block";
+    }
+
+    var isdisplayorange = "none";
+    if (ViewData["ExistingUser"] as string == "true")
+    {
+        isdisplayorange = "block";
+    }
+}
+ 
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Full-width input fields */
+        input[type=text], input[type=password], input[type=email] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        input[type=submit] {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 3% 2%;
+            border: 1px;
+            cursor: pointer;
+            opacity: 0.9;
+            width: 45%;
+        }
+        /* Add a background color when the inputs get focus */
+        input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Set a style for all buttons */
+        /* button {
+                            background-color: #04AA6D;
+                            color: white;
+                            padding: 14px 20px;
+                            margin: 8px 0;
+                            border: none;
+                            cursor: pointer;
+                            width: 100%;
+                            opacity: 0.9;
+                        }*/
+
+        input[type=submit]:hover {
+            opacity: 1;
+        }
+
+        /* Extra styles for the cancel button */
+        /*.cancelbtn {
+                            padding: 14px 20px;
+                            background-color: #f44336;
+                        }*/
+
+        /* Float cancel and signup buttons and add an equal width */
+        .cancelbtn, .signupbtn {
+            float: left;
+            width: 50%;
+        }
+
+        /* Add padding to container elements */
+        .container {
+            padding: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: flex; /* Shown by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: #474e5d;
+            padding-top: 7%; /*seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee*/
+            padding-inline: 30%;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* Style the horizontal ruler */
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /* The Close Button (x) */
+        .close {
+            position: absolute;
+            right: 20%;
+            top: 2%;
+            font-size: 40px;
+            font-weight: bold;
+            color: #f1f1f1;
+            margin: 2% -15%;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #f44336;
+                cursor: pointer;
+            }
+
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        a {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="id01" class="modal">
+        <form class="modal-content" method="post">
+            <div class="container">
+                <h1 style="color:mediumseagreen">Sign In</h1>
+                <input type="image" class="close" asp-controller="Home" asp-action="Index" src="https://cdn-icons-png.flaticon.com/512/106/106830.png" height="30px" width="30px" />
+                <hr>
+                <div class="mb-3">
+                    <label asp-for="UserName" style="color:mediumseagreen"></label>
+                    <input asp-for="UserName" placeholder="Enter Email" class="form-control" type="email" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" style="color:mediumseagreen"></label>
+                    <input asp-for="Password" placeholder="Enter password" class="form-control" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <span style="color:green;display:@isdisplaygreen">New Employee created try to Login...</span>
+                    <span style="color:orange;display:@isdisplayorange">User name already exist try to Login...</span>
+                    <span style="color:red;display:@isdisplayredLogin">Invalid User Name or Password...</span>
+                    <span style="color:red;display:@isdisplayredSignup">Unauthorised User...</span>
+                </div>
+                <div class="clearfix">
+                    <input type="submit" name="Login" class="signupbtn" asp-controller="Home" asp-action="Login" value="Sign Up" />
+                    <input type="submit" name="Login" class="signupbtn" asp-controller="Home" asp-action="Login" value="Sign In" />
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+﻿@model dynamic
+
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            padding: 5px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both
+        }
+
+        .column-66 {
+            float: left;
+            width: 66.66666%;
+            padding: 20px;
+        }
+
+        .column-33 {
+            float: left;
+            width: 33.33333%;
+            padding: 20px;
+        }
+
+        .large-font {
+            font-size: 48px;
+        }
+
+        .xlarge-font {
+            font-size: 64px
+        }
+
+        .button {
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #04AA6D;
+        }
+
+        img {
+            display: block;
+            height: auto;
+            max-width: 100%;
+        }
+
+        .flip-card-back {
+            background-color: #2980b9;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front {
+            background-color: #bbb;
+            color: black;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 300px;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            gap: 100px;
+            padding: 10px;
+        }
+
+            .grid-container > div {
+                align-content: center;
+                font-size: 30px;
+            }
+
+    </style>
+</head>
+<body>
+    <!-- The App Section -->
+    <div class="container">
+        <div class="row">
+            <div class="column-66">
+                <h1 class="xlarge-font"><b>West Agile Labs</b></h1>
+                <h1 class="large-font" style="color:darkgreen;"><b>We love creating engaging digital experiences for our clients.</b></h1>
+                <p>
+                    <span style="font-size:36px">We encountered a problem and we solved it.<br /><br /></span> We created West Agile Labs to build digital products. We design, develop, and provide consulting services to companies of all shapes and sizes. From startups to later-stage, well-funded companies to established Fortune 500 businesses, our globally distributed team provides the best services offered in the market.
+
+                    <br /><br />We partner with companies that align with our create, build, and scale philosophy. We create ideas and design solutions for both your needs and your customers’. We develop and build your software and technology today so that it supports your business. We develop and build our relationship with you and scale our efforts so that we can support you tomorrow and beyond.
+
+                    <br /><br />We’re headquartered in San Francisco, with delivery centres located in India.
+                </p>
+                <br />
+                <form method="post">
+                    <a type="submit" class="button" style="text-decoration:none" href="https://www.westagilelabs.com/">Visit WAL</a>
+                    <a type="submit" style="text-decoration:none" asp-controller="HR" asp-action="AddEmployee" class="button">Add Employee</a>
+                    @{
+                        LoginUser obj = Model.User;
+                    }
+                    <a type="submit" style="text-decoration:none" href="@Url.Action("SelfProfile", "Home", new {Id = obj.Id, Email = obj.Email, Role = obj.Role})" class="button">Your Profile</a>
+                    @*<a type="submit" style="text-decoration:none" asp-controller="Home" asp-action="SelfProfile" asp-route-obj="@obj.Email" class="button">Your Profile</a>*@
+                </form>
+            </div>
+            <div class="column-33">
+                <img src="https://cdn-images-1.medium.com/v2/resize:fill:256:256/1*bFveCNb_9vRfn116wnWhpA.png" width="335" height="471">
+            </div>
+        </div>
+    </div>
+    <br />
+    <div style="text-align:center">
+        <h3>Our Team</h3>
+    </div>
+    <br />
+
+    <div class="grid-container">
+        @foreach (Employee emp in Model.Employees)
+        {
+            <div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="container" style="background-color:aquamarine">
+                                @{
+                                    if (emp.Gender == "Male")
+                                    {
+                                        <img src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="Avatar" style="width:300px;height:300px;">
+                                    }
+                                    else
+                                    {
+                                        <img src="https://media.istockphoto.com/id/1330292875/nl/vector/female-avatar-icon.jpg?s=170667a&w=0&k=20&c=FGn39hdJHJlLryFgEB_e5sCEtKAVHzRfqsokIvA3-Bw=" alt="Avatar" style="width:300px;height:300px;">
+                                    }
+                                }
+                                <h3>@emp.Employee_Name</h3>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h1>@emp.Employee_Name</h1>
+                            @{
+                                foreach (EmployeeRole Emprole in Model.EmployeeRole)
+                                {
+                                    if (Emprole.EmployeeId == emp.Id)
+                                    {
+                                        foreach (Role role in Model.Roles)
+                                        {
+                                            if (role.Id == Emprole.RoleId)
+                                            {
+                                                <p>@role.RoleName</p>
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            <p>@emp.Email</p>
+                            <p>@emp.PhoneNumber</p>
+                            <p>Exp : @emp.Experience months</p>
+                            <form method="post">
+                                <input type="submit" class="btn btn-secondary" asp-controller="Home" asp-action="Profile" asp-route-id="@emp.Id" value="Profile">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Employee
+
+
+<html>
+<head>
+
+</head>
+<body>
+        <form method="post">
+            <div class="border p-3 mt-4">
+                <div class="row pb-2">
+                    <h2 class="text-primary">Create New Employee</h2>
+                    <br />
+                </div>
+                <div asp-validation-summary="All"></div>
+                <div class="mb-3">
+                    <label asp-for="Employee_Name">Employee Name</label>
+                    <input asp-for="Employee_Name" class="form-control" placeholder="Enter employee name"/>
+                    <span asp-validation-for="Employee_Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Email">Email Id</label>
+                    <input type="email" asp-for="Email" class="form-control" placeholder="Enter email address"/>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="PhoneNumber">Mobile Number</label>
+                    <input type="tel" asp-for="PhoneNumber" class="form-control" placeholder="Enter 10 digit mobile number"/>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Gender">Gender</label>
+                    <br />
+                    Male
+                    <input type="radio" class="form-check-input" asp-for="Gender" value="Male" id="optionsRadios1" />
+                    Female
+                    <input type="radio" class="form-check-input" asp-for="Gender" value="Female" id="optionsRadios1" />
+                    Other
+                    <input type="radio" class="form-check-input" asp-for="Gender" value="Other" id="optionsRadios1" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="DOB"></label>
+                    <input type="date" asp-for="DOB" class="form-control" placeholder="Enter Date of Birth"/>
+                    <span asp-validation-for="DOB" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Experience">Experience</label>
+                    <input type="number" asp-for="Experience" class="form-control" placeholder="Enter experience in months"/>
+                    <span asp-validation-for="Experience" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary" asp-controller="HR" asp-action="AddEmployee" style="width:150px">Create</button>
+                <a href="javascript:history.back()" class="btn btn-secondary" style="width:150px">Back to Home</a>
+            </div>
+        </form>
+</body>
+</html>
