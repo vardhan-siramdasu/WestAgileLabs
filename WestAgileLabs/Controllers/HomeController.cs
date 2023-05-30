@@ -66,43 +66,28 @@ namespace WestAgileLabs.Controllers
                     var hashpassword = getHash(obj.Password);
                     if (hashpassword == UserFromDb.Password)
                     {
-                        var UserFromLoginRole = _db.EmployeeRoles.Where(p => p.EmployeeEmail == obj.UserName);
-                        if (!UserFromLoginRole.Any())
-                        {
-                            return NotFound();
-                        }
+                        var UserFromLoginRole = _db.EmployeeRoles.FirstOrDefault(p => p.EmployeeEmail == obj.UserName);
+                        string role;
+                        var r = _db.Roles.FirstOrDefault(p => p.Id == UserFromLoginRole.RoleId);
+                        loginUser.Role = r.RoleName.ToString();
+                        loginUser.Email = obj.UserName.ToString();
+                        loginUser.Id = Convert.ToInt32(UserFromLoginRole.EmployeeId);
+                        role = UserFromLoginRole.RoleId.ToString();
+                        SecondaryLoginUser.Loginuser = loginUser;
+                        if (role == "1")
+                            return RedirectToAction("Home", "Admin", loginUser);
+                        else if (role == "2")
+                            return RedirectToAction("Home", "HR", loginUser);
+                        else if (role == "3")
+                            return RedirectToAction("Home", "TM", loginUser);
+                        else if (role == "4")
+                            return RedirectToAction("Home", "DM", loginUser);
+                        else if (Convert.ToInt32(role) >= 5)
+                            return RedirectToAction("Home", "Employee", loginUser);
                         else
-                        {
-                            string role;
-                            foreach (EmployeeRole roleobj in UserFromLoginRole)
-                            {
-                                var r = _db.Roles.Where(p => p.Id == roleobj.RoleId);
-                                foreach (var item in r)
-                                {
-                                    loginUser.Role = item.RoleName.ToString();
-                                }
-                                
-                                loginUser.Email = obj.UserName.ToString();
-                                loginUser.Id = Convert.ToInt32(roleobj.EmployeeId);
-                                //Console.WriteLine("{0},{1},{2}",loginUser.Id,loginUser.Email,loginUser.Role);
-                                role = roleobj.RoleId.ToString();
-                                SecondaryLoginUser.Loginuser = loginUser;
-                                //Console.WriteLine(role);
-                                if (role == "1")
-                                    return RedirectToAction("Home", "Admin", loginUser);//remember vardhan not 'Employee' 'Admin'
-                                else if (role == "2")
-                                    return RedirectToAction("Home", "HR", loginUser);
-                                else if (role == "3")
-                                    return RedirectToAction("Home", "TM", loginUser);
-                                else if (role == "4")
-                                    return RedirectToAction("Home", "DM", loginUser);
-                                else if (Convert.ToInt32(role) >= 5)
-                                    return RedirectToAction("Home", "Employee", loginUser);
-                                else
-                                    Console.WriteLine("role not found");
-                                return RedirectToAction("Home", "Employee", loginUser);
-                            }
-                        }
+                            Console.WriteLine("role not found");
+                        return RedirectToAction("Home", "Employee", loginUser);
+
                     }
                     else
                     {

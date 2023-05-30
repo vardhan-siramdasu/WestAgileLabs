@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections;
+using System.Data;
 using System.Dynamic;
 using WestAgileLabs.Data;
 using WestAgileLabs.Models;
@@ -83,19 +84,16 @@ namespace WestAgileLabs.Controllers
                             _db.Employees.Add(obj);
                             _db.SaveChanges();
                             //Console.WriteLine("added successfully");
-                            var emp = _db.Employees.Where(p => p.Email == obj.Email);
-                            foreach (var item in emp)
-                            {
-                                EmployeeRole EmpRole = new EmployeeRole();
-                                EmpRole.EmployeeId = item.Id;
-                                EmpRole.RoleId = 7;
-                                EmpRole.EmployeeEmail = item.Email;
+                            var emp = _db.Employees.FirstOrDefault(p => p.Email == obj.Email);
+                            EmployeeRole EmpRole = new EmployeeRole();
+                            EmpRole.EmployeeId = emp.Id;
+                            EmpRole.RoleId = 7;
+                            EmpRole.EmployeeEmail = emp.Email;
 
-                                _db.EmployeeRoles.Add(EmpRole);
-                                _db.SaveChanges();
-                                //Console.WriteLine("emp role added successfully");
-                                return RedirectToAction("AddEmployee");
-                            }
+                            _db.EmployeeRoles.Add(EmpRole);
+                            _db.SaveChanges();
+                            return RedirectToAction("AddEmployee");
+
                         }
                     }
                 }
@@ -209,9 +207,9 @@ namespace WestAgileLabs.Controllers
         public IActionResult AssignRole(string EIdRId)
         {
             string[] Email_RId = EIdRId.Split("~~");
-            Console.WriteLine(Email_RId[0]);
-            Console.WriteLine(Email_RId[1]);
-            if (Email_RId.Length != 2 || Email_RId[0] == "admin@gmail.com")
+            //Console.WriteLine(Email_RId[0]);
+            //Console.WriteLine(Email_RId[1]);
+            if (Email_RId.Length != 2 || Email_RId[0] == "vardhan@gmail.com")
             {
                 return RedirectToAction("SearchEmployee");
             }
@@ -226,19 +224,16 @@ namespace WestAgileLabs.Controllers
                         empid = item.Id; break;
                     }
                 }
-                var emprole = _db.EmployeeRoles.Where(p => p.EmployeeId == empid);
-                foreach (EmployeeRole role in emprole)
+
+                var emprole = _db.EmployeeRoles.FirstOrDefault(p => p.EmployeeId == empid);
+                emprole.RoleId = Convert.ToInt32(Email_RId[1]);
+                if (ModelState.IsValid)
                 {
-                    role.RoleId = Convert.ToInt32(Email_RId[1]);
-                    if (ModelState.IsValid)
-                    {
-                        _db.EmployeeRoles.Update(role);
-                        _db.SaveChanges();
-                        //Console.WriteLine("Role changed successfully");
-                        return RedirectToAction("SearchEmployee");
-                    }
-                    //Console.WriteLine("not changed");
+                    _db.EmployeeRoles.Update(emprole);
+                    _db.SaveChanges();
+                    return RedirectToAction("SearchEmployee");
                 }
+
             }
             return RedirectToAction("SearchEmployee");
         }

@@ -94,6 +94,7 @@
 
             var c = document.createElement("input");
             c.type = "number";
+            c.minLength = 1;
             var idtext = id.toString();
             idtext = idtext.concat('```');
             c.setAttribute('id', idtext);
@@ -123,6 +124,10 @@
                 var id = skills[key].toString();
                 id = id.concat('```');
                 var element = document.getElementById(id).value;
+                if(element.length <=0){
+                    alert("value cannot be empty!");
+                    return;
+                }
                 exp.push(element);
             }
             var b = document.getElementById("originalskills");

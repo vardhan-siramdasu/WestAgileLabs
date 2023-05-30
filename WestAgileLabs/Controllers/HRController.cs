@@ -72,19 +72,16 @@ namespace WestAgileLabs.Controllers
                             _db.Employees.Add(obj);
                             _db.SaveChanges();
                             //Console.WriteLine("added successfully");
-                            var emp = _db.Employees.Where(p => p.Email == obj.Email);
-                            foreach (var item in emp)
-                            {
-                                EmployeeRole EmpRole = new EmployeeRole();
-                                EmpRole.EmployeeId = item.Id;
-                                EmpRole.RoleId = 7;
-                                EmpRole.EmployeeEmail = item.Email;
+                            var emp = _db.Employees.FirstOrDefault(p => p.Email == obj.Email);
+                            EmployeeRole EmpRole = new EmployeeRole();
+                            EmpRole.EmployeeId = emp.Id;
+                            EmpRole.RoleId = 7;
+                            EmpRole.EmployeeEmail = emp.Email;
 
-                                _db.EmployeeRoles.Add(EmpRole);
-                                _db.SaveChanges();
-                                //Console.WriteLine("emp role added successfully");
-                                return RedirectToAction("AddEmployee");
-                            }
+                            _db.EmployeeRoles.Add(EmpRole);
+                            _db.SaveChanges();
+                            return RedirectToAction("AddEmployee");
+
                         }
                     }
                 }

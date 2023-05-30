@@ -30,7 +30,7 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="PhoneNumber">Mobile Number</label>
-                    <input type="tel" asp-for="PhoneNumber" class="form-control" placeholder="Enter 10 digit mobile number"/>
+                <input type="text" pattern="[6-9]{1}[0-9]{9}" asp-for="PhoneNumber" class="form-control" placeholder="Enter 10 digit mobile number" />
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
